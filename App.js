@@ -1,26 +1,33 @@
- import React from 'react';
-import { SafeAreaView, StyleSheet, StatusBar, Platform } from 'react-native';
+import React from 'react';
+import { StyleSheet, StatusBar, Platform } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar 
-        barStyle="dark-content" 
-        backgroundColor={Platform.OS === 'android' ? '#fff' : undefined} 
-      />
-      <WebView 
-        source={{ uri: 'https://www.google.com' }} 
-        style={styles.webview} 
-      />
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+        
+        <StatusBar
+          barStyle="dark-content"
+          backgroundColor={Platform.OS === 'android' ? '#ffffff' : undefined}
+        />
+        <WebView
+          source={{ uri: 'https://www.google.com' }}
+          style={styles.webview}
+          javaScriptEnabled
+          domStorageEnabled
+          startInLoadingState
+        />
+
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
   },
   webview: {
     flex: 1,
